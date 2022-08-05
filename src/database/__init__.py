@@ -1,5 +1,6 @@
-from .user import User
+from .user import User, user_default_config
 
 __all__ = [
-    'User'
+    'User',
+    'user_default_config',
 ]

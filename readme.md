@@ -12,3 +12,14 @@ datahack-generator-app-1  | User(id=11026, name='todo_rand_str', group_id=5)
 datahack-generator-app-1  | User(id=8444, name='todo_rand_str', group_id=3)
 datahack-generator-app-1  | User(id=10175, name='todo_rand_str', group_id=2)
 datahack-generator-app-1 exited with code 0
+
+
+
+---
+Как поднять спарк
+
+    docker compose -f docker-compose.spark.yml -p spark up
+
+после чего спарк дроступен тут 
+
+    http://localhost:8080/

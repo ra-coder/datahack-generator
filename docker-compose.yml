@@ -2,7 +2,7 @@ version: "3.9"
 services:
   generate:
     build: .
-    entrypoint: [ 'python', 'src/main.py' ]
+    entrypoint: [ 'python', 'src/main.py', '-config', 'cfg/conf_i.cfg' ]
     volumes:
       - output:/output
 

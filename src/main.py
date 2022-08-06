@@ -79,11 +79,9 @@ def generate_random_data_v1(input_class, count: int, config: Dict):
 if __name__ == '__main__':
     spark = SparkSession.builder.appName("data hack").config(
         "spark.driver.host", "localhost"
-    # ).config(
-    #     "spark.driver.port", "7077"
     ).getOrCreate()
 
-    df = spark.createDataFrame(generate_random_data_v1(User, count=3, config=user_default_config))
+    df = spark.createDataFrame(generate_random_data_v1(User, count=10, config=user_default_config))
     df.show()
     df.write.parquet("output/user.parquet")
     spark.stop()

@@ -11,7 +11,7 @@ services:
       - SPARK_SSL_ENABLED=no
     ports:
       - '8080:8080'
-      - '4040:4040'
+      - '7077:7077'
 
   spark-worker-a:
     #image: apache/spark:v3.3.0

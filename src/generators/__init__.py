@@ -3,7 +3,7 @@ from typing import Dict
 from database.types import TimeStamp
 from .float_numbers import rand_float_generator
 from .integet import mask_int_generator, rand_int_generator
-from .sample_choice import rand_sample_generator
+from .sample_choice import rand_choice_generator
 from .string import mask_str_generator, rand_str_generator
 from .timestamp import rand_timestamp_generator
 
@@ -11,7 +11,7 @@ GENERATOR_MAP = {
     'int': {
         'generator_type_to_gen': {
             'range': rand_int_generator,
-            'choice': rand_sample_generator,
+            'choice': rand_choice_generator,
             'mask': mask_int_generator,
         },
         'default': rand_int_generator,
@@ -19,7 +19,7 @@ GENERATOR_MAP = {
     'str': {
         'generator_type_to_gen': {
             'random': rand_str_generator,
-            'choice': rand_sample_generator,
+            'choice': rand_choice_generator,
             'mask': mask_str_generator,
         },
         'default': rand_str_generator,
@@ -28,7 +28,7 @@ GENERATOR_MAP = {
         'generator_type_to_gen': {
             'random': rand_float_generator,
             'range': rand_float_generator,
-            'choice': rand_sample_generator,
+            'choice': rand_choice_generator,
         },
         'default': rand_float_generator,
     },
@@ -36,7 +36,7 @@ GENERATOR_MAP = {
         'generator_type_to_gen': {
             'random': rand_timestamp_generator,
             'range': rand_timestamp_generator,
-            'choice': rand_sample_generator,
+            'choice': rand_choice_generator,
         },
         'default': rand_timestamp_generator,
     },

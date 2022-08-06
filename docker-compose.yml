@@ -5,11 +5,11 @@ services:
     ports:
       - "8000:5000"
     volumes:
-      - .:/code
+      - .:/code   # mount the current directory
       - logvolume01:/var/log
     links:
       - apache/spark-py	
   redis:
     image: redis
 volumes:
-  logvolume01: {}
+  logvolume01: {}  # empty volume

@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/code
+      - logvolume01:/var/log
+    links:
+      - apache/spark-py	
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}

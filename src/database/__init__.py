@@ -13,3 +13,11 @@ __all__ = [
     'Schedule',
     'schedule_default_config'
 ]
+
+
+db_default = {
+    User: user_default_config,
+    Company: company_default_config,
+    Category: category_default_config,
+    Schedule: schedule_default_config
+}

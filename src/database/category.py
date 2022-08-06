@@ -9,26 +9,30 @@ class Category:
 
 
 category_default_config = {
-    'id': {
-        'value_type': 'int',
-        'generator_type': 'range',
-        'params':
-            {
-                'from_value': 0,
-                'to_value': 12345,
-            }
-    },
-    'name': {
-        'value_type': 'str',
-        'generator_type': 'random',
-    },
-    'memory_used': {
-        'value_type': 'float',
-        'generator_type': 'range',
-        'params':
-            {
-                'from_value': 0.0,
-                'to_value': 32.0,
-            }
-    },
+    'table_name': 'category',
+    'count': 5,
+    'columns': {
+        'id': {
+            'value_type': 'int',
+            'generator_type': 'range',
+            'params':
+                {
+                    'from_value': 0,
+                    'to_value': 12345,
+                }
+        },
+        'name': {
+            'value_type': 'str',
+            'generator_type': 'random',
+        },
+        'memory_used': {
+            'value_type': 'float',
+            'generator_type': 'range',
+            'params':
+                {
+                    'from_value': 0.0,
+                    'to_value': 32.0,
+                }
+        },
+    }
 }

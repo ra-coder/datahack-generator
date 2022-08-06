@@ -1,18 +1,21 @@
 from dataclasses import dataclass
 
+from .types import TimeStamp
+
 
 @dataclass
 class User:
     id: int
     name: str
-    timestamp: float
     group_id: int
-    memory_used: float
+    label: int
+    label2: str
+    created_at: TimeStamp
 
 
 user_default_config = {
     'table_name': 'user',
-    'count': 1000,
+    'count': 11,
     'columns': {
         'id': {
             'value_type': 'int',
@@ -27,14 +30,9 @@ user_default_config = {
             'value_type': 'str',
             'generator_type': 'random',
         },
-        'timestamp': {
-            'value_type': 'float',
-            'generator_type': 'range',
-            'params':
-                {
-                    'from_value': 1625389452.157246,
-                    'to_value': 1825404472.352341,
-                }
+        'created_at': {
+            'value_type': 'timestamp',
+            'generator_type': 'random',
         },
         'group_id': {
             'value_type': 'int',
@@ -44,13 +42,20 @@ user_default_config = {
                     'choices': [1, 2, 3, 4, 5],
                 }
         },
-        'memory_used': {
-            'value_type': 'float',
-            'generator_type': 'range',
+        'label': {
+            'value_type': 'int',
+            'generator_type': 'mask',
             'params':
                 {
-                    'from_value': 0.0,
-                    'to_value': 32.0,
+                    'mask': '#00#',
+                }
+        },
+        'label2': {
+            'value_type': 'str',
+            'generator_type': 'mask',
+            'params':
+                {
+                    'mask': 'label-###',
                 }
         },
     }

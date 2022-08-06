@@ -10,7 +10,7 @@ class Category:
 
 category_default_config = {
     'table_name': 'category',
-    'count': 500,
+    'count': 50,
     'columns': {
         'id': {
             'value_type': 'int',

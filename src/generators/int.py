@@ -7,8 +7,9 @@ def rand_int_generator(from_value=0, to_value=100500):
         yield randint(from_value, to_value)
 
 
-def rand_int_generator_faker(from_value=0, to_value=100500, seed=1234):
+def mask_int_generator(mask="##", seed=None) -> int:
     fake = Faker()
-    Faker.seed(seed)
+    if seed:
+        Faker.seed(seed)
     while True:
-        yield fake.bothify(text=f'{randint(from_value, to_value)} #####')
+        yield int(fake.numerify(mask))

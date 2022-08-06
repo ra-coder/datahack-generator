@@ -8,12 +8,11 @@ class Schedule:
     name: str
     group_id: int
     memory_used: float
-    timestamp: float
 
 
 schedule_default_config = {
     'table_name': 'schedule',
-    'count': 700,
+    'count': 70,
     'columns': {
         'id': {
             'value_type': 'int',
@@ -47,15 +46,6 @@ schedule_default_config = {
                 {
                     'from_value': 0.0,
                     'to_value': 32.0,
-                }
-        },
-        'timestamp': {
-            'value_type': 'float',
-            'generator_type': 'range',
-            'params':
-                {
-                    'from_value': 1625389452.157246,
-                    'to_value': 1825404472.352341,
                 }
         },
     }

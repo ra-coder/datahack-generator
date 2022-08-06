@@ -8,12 +8,11 @@ class Company:
     name: str
     group_id: int
     memory_used: float
-    timestamp: float
 
 
 company_default_config = {
     'table_name': 'company',
-    'count': 20000,
+    'count': 20,
     'columns': {
         'id': {
             'value_type': 'int',
@@ -49,14 +48,5 @@ company_default_config = {
                     'to_value': 32.0,
                 }
         },
-        'timestamp': {
-            'value_type': 'float',
-            'generator_type': 'range',
-            'params':
-                {
-                    'from_value': 1625389452.157246,
-                    'to_value': 1825404472.352341,
-                }
-        }
     }
 }

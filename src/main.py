@@ -1,35 +1,25 @@
-from random import randint
 from typing import Dict
 import json
 import logging
 import time
+import shutil
 
 from pyspark.sql import SparkSession
 
 from database import db_default
-from generators.float import rand_float_generator, rand_timestamp_generator
-from generators.int import rand_int_generator
+from database.types import TimeStamp
+from generators.float import rand_float_generator
+from generators.int import rand_int_generator, mask_int_generator
 from generators.sample_choice import rand_sample_generator
-from generators.str import rand_str_generator
-
-
-def generate_random_data_v0(input_class, count: int):
-    for _ in range(count):
-        raw_data = dict()
-        for key, key_class in input_class.__annotations__.items():
-            if key_class == int:
-                raw_data[key] = randint(0, 1000)
-            elif key_class == str:
-                raw_data[key] = 'aabs'
-        res = input_class(**raw_data)
-        yield res
-
+from generators.str import rand_str_generator, mask_str_generator
+from generators.timestamp import rand_timestamp_generator
 
 GENERATOR_MAP = {
     'int': {
         'generator_type_to_gen': {
             'range': rand_int_generator,
             'choice': rand_sample_generator,
+            'mask': mask_int_generator,
         },
         'default': rand_int_generator,
     },
@@ -37,21 +27,31 @@ GENERATOR_MAP = {
         'generator_type_to_gen': {
             'random': rand_str_generator,
             'choice': rand_sample_generator,
+            'mask': mask_str_generator,
         },
         'default': rand_str_generator,
     },
     'float': {
         'generator_type_to_gen': {
             'random': rand_float_generator,
-            'range': rand_timestamp_generator,
+            'range': rand_float_generator,
             'choice': rand_sample_generator,
         },
         'default': rand_float_generator,
     },
+    'timestamp': {
+        'generator_type_to_gen': {
+            'random': rand_timestamp_generator,
+            'range': rand_timestamp_generator,
+            'choice': rand_sample_generator,
+        },
+        'default': rand_timestamp_generator,
+    },
+
 }
 
 
-def generate_random_data_v1(input_class, count: int, columns_config: Dict, columns_override_conf: Dict):
+def generate_random_rows(input_class, count: int, columns_config: Dict, columns_override_conf: Dict):
     key_to_generator = {}
     for key, key_class in input_class.__annotations__.items():
         if key_class == int:
@@ -60,8 +60,10 @@ def generate_random_data_v1(input_class, count: int, columns_config: Dict, colum
             gen_map = GENERATOR_MAP['str']
         elif key_class == float:
             gen_map = GENERATOR_MAP['float']
+        elif key_class == TimeStamp:
+            gen_map = GENERATOR_MAP['timestamp']
         else:
-            raise NotImplementedError
+            raise NotImplementedError(f'No generator for {key_class}')
 
         column_cfg = columns_override_conf.get(key) or columns_config.get(key)
 
@@ -96,7 +98,7 @@ if __name__ == '__main__':
     for table_class, table_config in db_default.items():
         table_override_conf = override_conf.get(table_config['table_name'], {})
         df = spark.createDataFrame(
-            generate_random_data_v1(
+            generate_random_rows(
                 table_class,
                 count=(table_override_conf.get('count') or table_config['count']),
                 columns_config=table_config['columns'],
@@ -104,6 +106,9 @@ if __name__ == '__main__':
             )
         )
         df.show()
-        df.write.parquet(f"output/{table_config['table_name']}.parquet")
+        res_filename = f"output/{table_config['table_name']}.parquet"
+        shutil.rmtree(res_filename)
+        df.write.parquet(res_filename)
+
     logging.warning('END sample generation. Time consumed %r', time.time() - start)
     spark.stop()

@@ -8,7 +8,10 @@ services:
       - .:/code   # mount the current directory
       - logvolume01:/var/log
     links:
-      - apache/spark-py	
+      - apache/spark-py
+      - redis
+  apache/spark-py:
+    image: apache/spark-py
   redis:
     image: redis
 volumes:

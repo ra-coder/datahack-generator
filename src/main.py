@@ -88,7 +88,9 @@ def generate_random_data_v1(input_class, count: int, config: Dict):
 
 
 temporarily = {
-    User: user_default_config, Company: company_default_config, Category: category_default_config,
+    User: user_default_config,
+    Company: company_default_config,
+    Category: category_default_config,
     Schedule: schedule_default_config
 }
 

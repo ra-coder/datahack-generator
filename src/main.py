@@ -1,6 +1,8 @@
 from random import randint
 from typing import Dict
 
+from pyspark.sql import SparkSession
+
 from database import User, user_default_config
 from generators.int import rand_int_generator
 from generators.float import rand_float_generator
@@ -75,5 +77,13 @@ def generate_random_data_v1(input_class, count: int, config: Dict):
 
 
 if __name__ == '__main__':
-    for rec in generate_random_data_v1(User, count=3, config=user_default_config):
-        print(rec)
+    spark = SparkSession.builder.appName("data hack").config(
+        "spark.driver.host", "localhost"
+    # ).config(
+    #     "spark.driver.port", "7077"
+    ).getOrCreate()
+
+    df = spark.createDataFrame(generate_random_data_v1(User, count=3, config=user_default_config))
+    df.show()
+    df.write.parquet("output/user.parquet")
+    spark.stop()

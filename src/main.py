@@ -1,5 +1,8 @@
 from random import randint
 from typing import Dict
+import json
+import logging
+import time
 
 from pyspark.sql import SparkSession
 
@@ -47,7 +50,7 @@ GENERATOR_MAP = {
 }
 
 
-def generate_random_data_v1(input_class, count: int, columns_config: Dict):
+def generate_random_data_v1(input_class, count: int, columns_config: Dict, columns_override_conf: Dict):
     key_to_generator = {}
     for key, key_class in input_class.__annotations__.items():
         if key_class == int:
@@ -59,15 +62,17 @@ def generate_random_data_v1(input_class, count: int, columns_config: Dict):
         else:
             raise NotImplementedError
 
-        if key not in columns_config:
+        column_cfg = columns_override_conf.get(key) or columns_config.get(key)
+
+        if column_cfg is None:
             gen = gen_map['default']
             params = {}
         else:
-            requested_type = columns_config[key]['generator_type']
+            requested_type = column_cfg['generator_type']
             if requested_type not in gen_map['generator_type_to_gen']:
                 raise NotImplementedError
             gen = gen_map['generator_type_to_gen'][requested_type]
-            params = columns_config[key].get('params', {})
+            params = column_cfg.get('params', {})
         key_to_generator[key] = gen(**params)
 
     for _ in range(count):
@@ -79,17 +84,25 @@ def generate_random_data_v1(input_class, count: int, columns_config: Dict):
 
 
 if __name__ == '__main__':
+    with open('../data_cfg.json', 'r') as fp:
+        override_conf = json.load(fp)
+
     spark = SparkSession.builder.appName("data hack").config(
         "spark.driver.host", "localhost"
     ).getOrCreate()
+    logging.warning('START sample generation')
+    start = time.time()
     for table_class, table_config in db_default.items():
+        table_override_conf = override_conf.get(table_config['table_name'], {})
         df = spark.createDataFrame(
             generate_random_data_v1(
                 table_class,
-                count=table_config['count'],
+                count=(table_override_conf.get('count') or table_config['count']),
                 columns_config=table_config['columns'],
+                columns_override_conf=table_override_conf.get('columns', {})
             )
         )
         df.show()
         df.write.parquet(f"output/{table_config['table_name']}.parquet")
+    logging.warning('END sample generation. Time consumed %r', time.time() - start)
     spark.stop()

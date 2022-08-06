@@ -3,6 +3,7 @@ from typing import Dict
 
 from database import User, user_default_config
 from generators.int import rand_int_generator
+from generators.float import rand_float_generator
 from generators.sample_choice import rand_sample_generator
 from generators.str import rand_str_generator
 
@@ -32,6 +33,12 @@ GENERATOR_MAP = {
             'random': rand_str_generator,
         },
         'default': rand_str_generator,
+    },
+    'float': {
+        'generator_type_to_gen': {
+            'range': rand_float_generator,
+        },
+        'default': rand_float_generator,
     }
 }
 
@@ -43,6 +50,8 @@ def generate_random_data_v1(input_class, count: int, config: Dict):
             gen_map = GENERATOR_MAP['int']
         elif key_class == str:
             gen_map = GENERATOR_MAP['str']
+        elif key_class == float:
+            gen_map = GENERATOR_MAP['float']
         else:
             raise NotImplementedError
 

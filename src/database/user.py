@@ -6,6 +6,7 @@ class User:
     id: int
     name: str
     group_id: int
+    memory_used: float
 
 
 user_default_config = {
@@ -30,4 +31,13 @@ user_default_config = {
                 'choices': [1, 2, 3, 4, 5],
             }
     },
+    'memory_used': {
+        'value_type': 'float',
+        'generator_type': 'range',
+        'params':
+            {
+                'from_value': 0.0,
+                'to_value': 32.0,
+            }
+    }
 }

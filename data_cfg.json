@@ -1,12 +1,32 @@
 {
   "user": {
-    "count": 5,
+    "count": 100,
     "columns": {
+      "id": {
+        "generator_type": "choice",
+        "params": {
+          "choices": [
+            1,
+            2,
+            3
+          ]
+        }
+      },
       "group_id": {
         "generator_type": "choice",
         "params": {
           "choices": [
             -1
+          ]
+        }
+      },
+      "name": {
+        "generator_type": "choice",
+        "params": {
+          "choices": [
+            "Vasya",
+            "Sasha",
+            "Pasha"
           ]
         }
       }

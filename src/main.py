@@ -37,6 +37,7 @@ GENERATOR_MAP = {
     'str': {
         'generator_type_to_gen': {
             'random': rand_str_generator,
+            'choice': rand_sample_generator,
         },
         'default': rand_str_generator,
     },
@@ -44,6 +45,7 @@ GENERATOR_MAP = {
         'generator_type_to_gen': {
             'random': rand_float_generator,
             'range': rand_timestamp_generator,
+            'choice': rand_sample_generator,
         },
         'default': rand_float_generator,
     },

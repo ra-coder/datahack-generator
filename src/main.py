@@ -3,7 +3,17 @@ from typing import Dict
 
 from pyspark.sql import SparkSession
 
-from database import User, user_default_config
+from database import (
+    User,
+    user_default_config,
+    Company,
+    company_default_config,
+    Category,
+    category_default_config,
+    Schedule,
+    schedule_default_config,
+)
+from generators.float import rand_float_generator, rand_timestamp_generator
 from generators.int import rand_int_generator
 from generators.float import rand_float_generator
 from generators.sample_choice import rand_sample_generator
@@ -38,10 +48,11 @@ GENERATOR_MAP = {
     },
     'float': {
         'generator_type_to_gen': {
-            'range': rand_float_generator,
+            'random': rand_float_generator,
+            'range': rand_timestamp_generator,
         },
         'default': rand_float_generator,
-    }
+    },
 }
 
 
@@ -75,6 +86,11 @@ def generate_random_data_v1(input_class, count: int, config: Dict):
             }
         )
 
+
+temporarily = {
+    User: user_default_config, Company: company_default_config, Category: category_default_config,
+    Schedule: schedule_default_config
+}
 
 if __name__ == '__main__':
     spark = SparkSession.builder.appName("data hack").config(

@@ -13,7 +13,7 @@ class Schedule:
 
 schedule_default_config = {
     'table_name': 'schedule',
-    'count': 7,
+    'count': 700,
     'columns': {
         'id': {
             'value_type': 'int',

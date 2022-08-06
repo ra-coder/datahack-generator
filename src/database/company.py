@@ -13,7 +13,7 @@ class Company:
 
 company_default_config = {
     'table_name': 'company',
-    'count': 20,
+    'count': 20000,
     'columns': {
         'id': {
             'value_type': 'int',

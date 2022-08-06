@@ -8,4 +8,6 @@ RUN apt-get update && \
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY src src
+COPY data_cfg.json data_cfg.json
+
 ENTRYPOINT ["python", "main.py"]

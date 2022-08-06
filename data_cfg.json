@@ -1,0 +1,15 @@
+{
+  "user": {
+    "count": 5,
+    "columns": {
+      "group_id": {
+        "generator_type": "choice",
+        "params": {
+          "choices": [
+            -1
+          ]
+        }
+      }
+    }
+  }
+}

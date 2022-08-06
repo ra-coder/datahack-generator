@@ -9,7 +9,6 @@ from pyspark.sql import SparkSession
 from database import db_default
 from generators.float import rand_float_generator, rand_timestamp_generator
 from generators.int import rand_int_generator
-from generators.float import rand_float_generator
 from generators.sample_choice import rand_sample_generator
 from generators.str import rand_str_generator
 

@@ -5,8 +5,6 @@ from dataclasses import dataclass
 class Schedule:
     id: int
     user_id: int
-    address: str
-    name: str
     group_id: int
     memory_used: float
     label2: str
@@ -48,14 +46,6 @@ schedule_default_config = {
                 'table_name': 'user',
                 'column_name': 'label2',
             },
-        },
-        'address': {
-            'value_type': 'str',
-            'generator_type': 'random',
-        },
-        'name': {
-            'value_type': 'str',
-            'generator_type': 'random',
         },
         'group_id': {
             'value_type': 'int',

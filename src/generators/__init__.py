@@ -165,6 +165,9 @@ class DBGenerator:
 
             df.show()
             res_filename = f"output/{table_name}.parquet"
-            shutil.rmtree(res_filename)
+            try:
+                shutil.rmtree(res_filename)
+            except FileNotFoundError:
+                pass
             df.write.parquet(res_filename)
             processed_tables.add(table_name)

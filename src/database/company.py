@@ -28,10 +28,20 @@ company_default_config = {
         'address': {
             'value_type': 'str',
             'generator_type': 'random',
+            'params':
+                {
+                    'min_chars': 5,
+                    'max_chars': 100,
+                }
         },
         'name': {
             'value_type': 'str',
             'generator_type': 'random',
+            'params':
+                {
+                    'min_chars': 10,
+                    'max_chars': 20,
+                }
         },
         'group_id': {
             'value_type': 'int',

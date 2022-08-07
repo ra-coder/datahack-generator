@@ -9,6 +9,8 @@ class Company:
     name: str
     slag: str
     group_id: int
+    owner_id: int
+    category_id: int
     created_at: date
 
 
@@ -59,6 +61,22 @@ company_default_config = {
                 {
                     'choices': [1, 2, 3, 4, 5],
                 }
+        },
+        'category_id': {
+            'value_type': 'int',
+            'generator_type': 'foreign_key',
+            'params': {
+                'table_name': 'category',
+                'column_name': 'id',
+            },
+        },
+        'owner_id': {
+            'value_type': 'int',
+            'generator_type': 'foreign_key',
+            'params': {
+                'table_name': 'user',
+                'column_name': 'id',
+            },
         },
         'created_at': {
             'value_type': 'date',

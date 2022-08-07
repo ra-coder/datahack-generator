@@ -28,7 +28,32 @@ JOIN_KEYS = {
                 'column_names': ['user_id'],
             }
         ],
+    },
+    'category_id': {
+        'primary_keys': {
+            'table_name': 'category',
+            'column_names': ['id'],
+        },
+        'secondary_use': [
+            {
+                'table_name': 'company',
+                'column_names': ['category_id'],
+            }
+        ],
+    },
+    'owner_id': {
+        'primary_keys': {
+            'table_name': 'user',
+            'column_names': ['id'],
+        },
+        'secondary_use': [
+            {
+                'table_name': 'company',
+                'column_names': ['owner_id'],
+            }
+        ],
     }
+
 }
 
 DB_DESCRIPTION = {

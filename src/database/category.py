@@ -14,11 +14,10 @@ category_default_config = {
     'columns': {
         'id': {
             'value_type': 'int',
-            'generator_type': 'range',
+            'generator_type': 'mask',
             'params':
                 {
-                    'from_value': 0,
-                    'to_value': 12345,
+                    'mask': '200###'
                 }
         },
         'name': {

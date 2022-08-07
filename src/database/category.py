@@ -17,7 +17,7 @@ category_default_config = {
             'generator_type': 'mask',
             'params':
                 {
-                    'mask': '200###'
+                    'mask': '###200'
                 }
         },
         'name': {

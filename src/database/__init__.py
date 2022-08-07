@@ -17,6 +17,19 @@ JOIN_KEYS = {
             }
         ],
     },
+    'user_info_2': {
+        'primary_keys': {
+            'table_name': 'user',
+            'column_names': ['label2'],
+        },
+        'secondary_use': [
+            {
+                'table_name': 'schedule',
+                'column_names': ['label2_new'],
+            }
+        ],
+    },
+
     'user_id': {
         'primary_keys': {
             'table_name': 'user',

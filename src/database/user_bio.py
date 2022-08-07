@@ -12,7 +12,7 @@ class UserBio:
 
 user_bio_default_config = {
     'table_name': 'user_bio',
-    'count': 11,
+    'count': 300,
     'columns': {
         'user_id': {
             'value_type': 'int',

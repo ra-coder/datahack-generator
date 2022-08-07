@@ -4,6 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class Schedule:
     id: int
+    user_id: int
     address: str
     name: str
     group_id: int
@@ -22,6 +23,14 @@ schedule_default_config = {
                     'from_value': 0,
                     'to_value': 12345,
                 }
+        },
+        'user_id': {
+            'value_type': 'int',
+            'generator_type': 'foreign_key',
+            'params': {
+                'table_name': 'user',
+                'column_name': 'id',
+            },
         },
         'address': {
             'value_type': 'str',

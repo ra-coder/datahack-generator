@@ -38,11 +38,10 @@ company_default_config = {
         },
         'name': {
             'value_type': 'str',
-            'generator_type': 'random',
+            'generator_type': 'mask',
             'params':
                 {
-                    'min_chars': 10,
-                    'max_chars': 20,
+                    'mask': '###### Inc.'
                 }
         },
         'slag': {

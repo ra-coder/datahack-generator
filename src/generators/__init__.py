@@ -162,7 +162,7 @@ class DBGenerator:
                         )
                     )
                 except NeedTableException as e:
-                    logging.warning('skip table name since %r', e)
+                    logging.warning('skip table %r since %r', table_name, e)
                     continue
 
                 df.show()

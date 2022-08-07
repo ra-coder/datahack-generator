@@ -1,6 +1,6 @@
 {
   "user": {
-    "count": 100,
+    "count": 5,
     "columns": {
       "id": {
         "generator_type": "mask",

@@ -29,7 +29,6 @@ JOIN_KEYS = {
             }
         ],
     }
-
 }
 
 DB_DESCRIPTION = {

@@ -17,7 +17,7 @@ class User:
 
 user_default_config = {
     'table_name': 'user',
-    'count': 11,
+    'count': 5,
     'columns': {
         'id': {
             'value_type': 'int',

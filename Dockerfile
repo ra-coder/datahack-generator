@@ -7,7 +7,9 @@ RUN apt-get update && \
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY src src
-COPY data_cfg.json data_cfg.json
+
+WORKDIR /code
+COPY src /code
+ENV PYTHONPATH "${PYTHONPATH}:/code"
 
 ENTRYPOINT ["python", "main.py"]

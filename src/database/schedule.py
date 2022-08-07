@@ -1,3 +1,4 @@
+from datetime import date
 from dataclasses import dataclass
 
 
@@ -8,6 +9,7 @@ class Schedule:
     group_id: int
     memory_used: float
     label2: str
+    user_birthday: date
 
 
 schedule_default_config = {

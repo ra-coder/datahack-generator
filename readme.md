@@ -1,25 +1,44 @@
 use python3.10
 
-
+# build
 datahack-generator> docker compose build
 
-datahack-generator> docker compose up   
-[+] Running 2/2
- - Network datahack-generator_default  Created                                                                                                                         0.6s 
- - Container datahack-generator-app-1  Created                                                                                                                         0.1s
-Attaching to datahack-generator-app-1
-datahack-generator-app-1  | User(id=11026, name='todo_rand_str', group_id=5)
-datahack-generator-app-1  | User(id=8444, name='todo_rand_str', group_id=3)
-datahack-generator-app-1  | User(id=10175, name='todo_rand_str', group_id=2)
-datahack-generator-app-1 exited with code 0
+# create database
 
+    docker compose up generate    
+
+=> таблицы в формате паркет будут в вольюме output 
+(feel fry to modify docker-compose)
+
+# test cases
+Для запуска тесткейса надо выполнить команду вида 
+
+    docker compose up test_0_a 
+
+Для звпуска всех тестов
+
+
+    docker compose up all_tests 
+
+---
+# TODO преза
+#    * овервью архитектуры
+#    * детали реализации генераторов
+#    * плюсы что круто получилось
+#       * ленивость
+#       * спарк
+#       * docker
+#    * лайв демо на тесткейсах
 
 
 ---
-Как поднять спарк
+# out of scope
+## Как поднять спарк
 
     docker compose -f docker-compose.spark.yml -p spark up
 
 после чего спарк дроступен тут 
 
     http://localhost:8080/
+
+

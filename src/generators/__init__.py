@@ -66,9 +66,9 @@ class NeedTableException(RuntimeError):
 
 
 class DBGenerator:
-    def __init__(self, db_description, override_conf, spark):
+    def __init__(self, spark, db_description, override_conf=None):
         self.db_description = db_description
-        self.override_conf = override_conf
+        self.override_conf = override_conf if override_conf else {}
         self.spark = spark
         self._foreign_keys_samples = {}
 
@@ -143,6 +143,7 @@ class DBGenerator:
 
     def generate_database(self):
         processed_tables = set()
+        result_path_info = {}
         for table_class, table_config in self.db_description['tables'].items():
             table_name = table_config['table_name']
             if table_name in processed_tables:
@@ -170,4 +171,6 @@ class DBGenerator:
             except FileNotFoundError:
                 pass
             df.write.parquet(res_filename)
+            result_path_info[table_name] = res_filename
             processed_tables.add(table_name)
+        return result_path_info

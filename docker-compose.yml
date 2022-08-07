@@ -2,15 +2,24 @@ version: "3.9"
 services:
   generate:
     build: .
-    entrypoint: [ 'python', 'src/main.py', '-config', 'cfg/conf_i.cfg' ]
+    entrypoint: [ 'python', 'main.py']
     volumes:
       - output:/output
 
-  test1:
+#  test1:
+#    build: .
+#    entrypoint: [ 'python', 'test1.py' ]
+#    volumes:
+#      - output:/output
+
+  all_tests:
     build: .
-    entrypoint: [ 'python', 'src/test1.py' ]
-    volumes:
-      - output:/output
+    entrypoint: [ 'pytest', 'tests' ]
+
+
+  test_0_a:
+    build: .
+    entrypoint: [ 'pytest', 'tests/test_0_a.py' ]
 
 volumes:
   output:

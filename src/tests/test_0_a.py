@@ -25,6 +25,3 @@ def test_0_a():
     df = spark.read.parquet(result_path_info["user"])
     df.show(5)
     spark.stop()
-
-
-test_0_a()

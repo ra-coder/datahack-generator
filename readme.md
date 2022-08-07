@@ -1,7 +1,8 @@
 use python3.10
 
 # build
-datahack-generator> docker compose build
+
+    docker compose build
 
 # create database
 

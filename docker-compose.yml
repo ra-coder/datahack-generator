@@ -2,15 +2,10 @@ version: "3.9"
 services:
   generate:
     build: .
-    entrypoint: [ 'python', 'main.py']
+    entrypoint: [ 'python', 'main.py' ]
     volumes:
       - output:/output
 
-#  test1:
-#    build: .
-#    entrypoint: [ 'python', 'test1.py' ]
-#    volumes:
-#      - output:/output
 
   all_tests:
     build: .
@@ -20,6 +15,16 @@ services:
   test_0_a:
     build: .
     entrypoint: [ 'pytest', 'tests/test_0_a.py' ]
+
+  test_1:
+    build: .
+    entrypoint: [ 'pytest', 'tests/test_1.py' ]
+
+  test_2:
+    build: .
+    #entrypoint: [ 'python', 'tests/test_2.py' ]
+    entrypoint: [ 'pytest', 'tests/test_2.py' ]
+
 
 volumes:
   output:

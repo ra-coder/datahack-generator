@@ -7,8 +7,8 @@ class Company:
     id: int
     address: str
     name: str
+    slag: str
     group_id: int
-    memory_used: float
     created_at: date
 
 
@@ -43,21 +43,21 @@ company_default_config = {
                     'max_chars': 20,
                 }
         },
+        'slag': {
+            'value_type': 'str',
+            'generator_type': 'random',
+            'params':
+                {
+                    'min_chars': 5,
+                    'max_chars': 5,
+                }
+        },
         'group_id': {
             'value_type': 'int',
             'generator_type': 'choice',
             'params':
                 {
                     'choices': [1, 2, 3, 4, 5],
-                }
-        },
-        'memory_used': {
-            'value_type': 'float',
-            'generator_type': 'range',
-            'params':
-                {
-                    'from_value': 0.0,
-                    'to_value': 32.0,
                 }
         },
         'created_at': {

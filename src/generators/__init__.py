@@ -144,33 +144,34 @@ class DBGenerator:
     def generate_database(self):
         processed_tables = set()
         result_path_info = {}
-        for table_class, table_config in self.db_description['tables'].items():
-            table_name = table_config['table_name']
-            if table_name in processed_tables:
-                continue
+        while len(processed_tables) != len(self.db_description['tables']):
+            for table_class, table_config in self.db_description['tables'].items():
+                table_name = table_config['table_name']
+                if table_name in processed_tables:
+                    continue
 
-            table_override_conf = self.override_conf.get(table_config['table_name'], {})
-            try:
-                df = self.spark.createDataFrame(
-                    self.generate_random_rows(
-                        table_class,
-                        table_name=table_name,
-                        count=(table_override_conf.get('count') or table_config['count']),
-                        columns_config=table_config['columns'],
-                        columns_override_conf=table_override_conf.get('columns', {})
+                table_override_conf = self.override_conf.get(table_config['table_name'], {})
+                try:
+                    df = self.spark.createDataFrame(
+                        self.generate_random_rows(
+                            table_class,
+                            table_name=table_name,
+                            count=(table_override_conf.get('count') or table_config['count']),
+                            columns_config=table_config['columns'],
+                            columns_override_conf=table_override_conf.get('columns', {})
+                        )
                     )
-                )
-            except NeedTableException as e:
-                logging.warning('skip table name since %r', e)
-                continue
+                except NeedTableException as e:
+                    logging.warning('skip table name since %r', e)
+                    continue
 
-            df.show()
-            res_filename = f"output/{table_name}.parquet"
-            try:
-                shutil.rmtree(res_filename)
-            except FileNotFoundError:
-                pass
-            df.write.parquet(res_filename)
-            result_path_info[table_name] = res_filename
-            processed_tables.add(table_name)
+                df.show()
+                res_filename = f"output/{table_name}.parquet"
+                try:
+                    shutil.rmtree(res_filename)
+                except FileNotFoundError:
+                    pass
+                df.write.parquet(res_filename)
+                result_path_info[table_name] = res_filename
+                processed_tables.add(table_name)
         return result_path_info

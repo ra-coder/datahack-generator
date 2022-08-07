@@ -1,3 +1,4 @@
+from datetime import date
 from dataclasses import dataclass
 
 
@@ -8,6 +9,7 @@ class Company:
     name: str
     group_id: int
     memory_used: float
+    created_at: date
 
 
 company_default_config = {
@@ -47,6 +49,14 @@ company_default_config = {
                     'from_value': 0.0,
                     'to_value': 32.0,
                 }
+        },
+        'created_at': {
+            'value_type': 'datetime',
+            'generator_type': 'range',
+            'params': {
+                'from_value': '2010-01-01',
+                'to_value': '2030-01-01',
+            }
         },
     }
 }

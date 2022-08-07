@@ -1,5 +1,5 @@
 import logging
-from collections import defaultdict
+from datetime import date
 from typing import Dict
 import shutil
 from random import choice
@@ -10,6 +10,7 @@ from .integet import mask_int_generator, rand_int_generator
 from .sample_choice import rand_choice_generator, choice_from_foreign_table_column_stab
 from .string import mask_str_generator, rand_str_generator
 from .timestamp import rand_timestamp_generator
+from .dates import rand_date_generator
 
 GENERATOR_MAP = {
     'int': {
@@ -48,7 +49,15 @@ GENERATOR_MAP = {
         },
         'default': rand_timestamp_generator,
     },
-
+    'date': {
+        'generator_type_to_gen': {
+            'random': rand_date_generator,
+            'range': rand_date_generator,
+            'choice': rand_choice_generator,
+            'foreign_key': choice_from_foreign_table_column_stab,
+        },
+        'default': rand_date_generator
+    }
 }
 
 
@@ -90,6 +99,8 @@ class DBGenerator:
                 gen_map = GENERATOR_MAP['float']
             elif key_class == TimeStamp:
                 gen_map = GENERATOR_MAP['timestamp']
+            elif key_class == date:
+                gen_map = GENERATOR_MAP['date']
             else:
                 raise NotImplementedError(f'No generator for {key_class} for {key} or {input_class}')
 

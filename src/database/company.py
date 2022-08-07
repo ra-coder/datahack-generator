@@ -51,7 +51,7 @@ company_default_config = {
                 }
         },
         'created_at': {
-            'value_type': 'datetime',
+            'value_type': 'date',
             'generator_type': 'range',
             'params': {
                 'from_value': '2010-01-01',

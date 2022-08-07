@@ -7,12 +7,12 @@ JOIN_KEYS = {
     'user_id': {
         'primary_keys': {
             'table_name': 'user',
-            'column_names': ['id'],
+            'column_names': ['id', 'birthday', 'label2'],
         },
         'secondary_use': [
             {
                 'table_name': 'schedule',
-                'column_names': ['user_id'],
+                'column_names': ['user_id', 'user_birthday', 'label2'],
             }
         ],
     }

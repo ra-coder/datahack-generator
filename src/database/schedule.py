@@ -9,6 +9,7 @@ class Schedule:
     name: str
     group_id: int
     memory_used: float
+    label2: str
 
 
 schedule_default_config = {
@@ -30,6 +31,22 @@ schedule_default_config = {
             'params': {
                 'table_name': 'user',
                 'column_name': 'id',
+            },
+        },
+        'user_birthday': {
+            'value_type': 'date',
+            'generator_type': 'foreign_key',
+            'params': {
+                'table_name': 'user',
+                'column_name': 'birthday',
+            },
+        },
+        'label2': {
+            'value_type': 'date',
+            'generator_type': 'foreign_key',
+            'params': {
+                'table_name': 'user',
+                'column_name': 'label2',
             },
         },
         'address': {

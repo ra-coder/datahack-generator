@@ -1,3 +1,4 @@
+from datetime import date
 from dataclasses import dataclass
 
 from .types import TimeStamp
@@ -11,6 +12,7 @@ class User:
     label: int
     label2: str
     created_at: TimeStamp
+    birthday: date
 
 
 user_default_config = {
@@ -57,6 +59,14 @@ user_default_config = {
                 {
                     'mask': 'label-###',
                 }
+        },
+        'birthday': {
+            'value_type': 'date',
+            'generator_type': 'range',
+            'params': {
+                'from_value': '1950-01-01',
+                'to_value': '2020-01-01',
+            }
         },
     }
 }

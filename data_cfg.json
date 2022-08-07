@@ -3,13 +3,9 @@
     "count": 100,
     "columns": {
       "id": {
-        "generator_type": "choice",
+        "generator_type": "mask",
         "params": {
-          "choices": [
-            1,
-            2,
-            3
-          ]
+          "mask": "100###"
         }
       },
       "group_id": {

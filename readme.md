@@ -1,36 +1,24 @@
 use python3.10
 
-# build
+# Build
 
     docker compose build
 
-# create database
+# Create database
 
     docker compose up generate    
 
 => таблицы в формате паркет будут в вольюме output 
 (feel fry to modify docker-compose)
 
-# test cases
+# Test cases
 Для запуска тесткейса надо выполнить команду вида 
 
     docker compose up test_0_a 
 
 Для звпуска всех тестов
 
-
     docker compose up all_tests 
-
----
-# TODO преза
-#    * овервью архитектуры
-#    * детали реализации генераторов
-#    * плюсы что круто получилось
-#       * ленивость
-#       * спарк
-#       * docker
-#    * лайв демо на тесткейсах
-
 
 ---
 # out of scope

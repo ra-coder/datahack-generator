@@ -6,11 +6,9 @@ services:
     volumes:
       - output:/output
 
-
   all_tests:
     build: .
     entrypoint: [ 'pytest', 'tests' ]
-
 
   test_0_a:
     build: .

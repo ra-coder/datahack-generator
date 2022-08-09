@@ -1,6 +1,6 @@
 {
   "user": {
-    "count": 5,
+    "count": 5000,
     "columns": {
       "id": {
         "generator_type": "mask",
@@ -24,6 +24,14 @@
             "Sasha",
             "Pasha"
           ]
+        }
+      },
+      "label2": {
+        "value_type": "str",
+        "generator_type": "random",
+        "params": {
+          "min_chars": 4,
+          "max_chars": 6
         }
       }
     }

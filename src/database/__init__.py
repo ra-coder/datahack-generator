@@ -17,6 +17,19 @@ JOIN_KEYS = {
             }
         ],
     },
+    'user_info_2': {
+        'primary_keys': {
+            'table_name': 'user',
+            'column_names': ['label2'],
+        },
+        'secondary_use': [
+            {
+                'table_name': 'schedule',
+                'column_names': ['label2_new'],
+            }
+        ],
+    },
+
     'user_id': {
         'primary_keys': {
             'table_name': 'user',
@@ -28,7 +41,32 @@ JOIN_KEYS = {
                 'column_names': ['user_id'],
             }
         ],
+    },
+    'category_id': {
+        'primary_keys': {
+            'table_name': 'category',
+            'column_names': ['id'],
+        },
+        'secondary_use': [
+            {
+                'table_name': 'company',
+                'column_names': ['category_id'],
+            }
+        ],
+    },
+    'owner_id': {
+        'primary_keys': {
+            'table_name': 'user',
+            'column_names': ['id'],
+        },
+        'secondary_use': [
+            {
+                'table_name': 'company',
+                'column_names': ['owner_id'],
+            }
+        ],
     }
+
 }
 
 DB_DESCRIPTION = {

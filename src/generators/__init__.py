@@ -82,7 +82,7 @@ class DBGenerator:
     ):
         key_to_generator = {}
         secondary_use_info = {
-            rec['primary_keys']['table_name']: rec for rec in self.db_description['join_keys'].values()
+            (key, rec['primary_keys']['table_name']): rec for key, rec in self.db_description['join_keys'].items()
             if [rec2 for rec2 in rec['secondary_use'] if rec2['table_name'] == table_name]
         }
         primary_use_info = [
@@ -124,13 +124,13 @@ class DBGenerator:
                 }
             )
             if secondary_use_info:
-                for from_table_name, use_info in secondary_use_info.items():
-                    if from_table_name not in self._foreign_keys_samples:
+                for from_table_name_pair, use_info in secondary_use_info.items():
+                    if from_table_name_pair[1] not in self._foreign_keys_samples:
                         raise NeedTableException
                     for reference in use_info['secondary_use']:
                         if reference['table_name'] != table_name:
                             continue
-                        template_row = choice(self._foreign_keys_samples[from_table_name])
+                        template_row = choice(self._foreign_keys_samples[from_table_name_pair[1]])
                         for key, template_key in zip(
                                 reference['column_names'],
                                 use_info['primary_keys']['column_names'],
@@ -162,7 +162,7 @@ class DBGenerator:
                         )
                     )
                 except NeedTableException as e:
-                    logging.warning('skip table name since %r', e)
+                    logging.warning('skip table %r since %r', table_name, e)
                     continue
 
                 df.show()
